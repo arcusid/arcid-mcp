@@ -39,7 +39,8 @@ export function registerTools(server: McpServer, client: ArcIdClient): void {
       inputSchema: {
         query: z.string().trim().max(120).optional().describe("Full-text search (prefix match on words)"),
         owner: z.string().regex(/^0x[0-9a-fA-F]{40}$/, "owner must be a 0x address").optional().describe("Owner wallet address"),
-        readable_only: z.boolean().optional().describe("Only agents whose profile could be parsed"),
+        readable_only: z.boolean().default(true)
+          .describe("Only agents with a readable profile (name, description). Default true; set false to include unnamed agents"),
         sort: z.enum(["newest", "score", "feedback", "settled", "relevance"]).optional()
           .describe("Default: relevance when a query is given, otherwise newest"),
         page,

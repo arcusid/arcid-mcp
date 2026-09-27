@@ -38,6 +38,17 @@ describe("MCP server", () => {
     expect(JSON.parse(text(res))).toEqual({ data: [{ id: 3 }], meta: { total: 1, page: 1, limit: 10 } });
   });
 
+  it("search_agents hides unreadable profiles by default and can include them", async () => {
+    const f = mockFetch(okBody([], { total: 0, page: 1, limit: 24 }));
+    const client = await connect(f);
+    await client.callTool({ name: "search_agents", arguments: {} });
+    await client.callTool({ name: "search_agents", arguments: { readable_only: false } });
+    expect(f.mock.calls.map((c) => String(c[0]))).toEqual([
+      "https://api.test/v1/agents?readable=true",
+      "https://api.test/v1/agents?readable=false",
+    ]);
+  });
+
   it("get_agent and friends call the right endpoints", async () => {
     const f = mockFetch(okBody({ id: 5 }));
     const client = await connect(f);
