@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "arcid-mcp",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "routes": [{ "pattern": "mcp.arcusid.com", "custom_domain": true }],
+  // Internal call to the arcid-api Worker; the visitor's IP is forwarded so rate limits stay per user.
+  "services": [{ "binding": "API", "service": "arcid-api" }],
+  "vars": {
+    "ARCID_API_URL": "https://api.arcusid.com",
+    "INFO_URL": "https://arcusid.com/mcp"
+  },
+  "observability": { "enabled": true }
+}

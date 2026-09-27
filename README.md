@@ -17,7 +17,21 @@ Read-only. No wallet or API key needed.
 | `get_registry_stats` | Index totals |
 | `get_indexer_health` | How far the indexer is behind the chain head |
 
-## Install
+## Connect
+
+### Remote (claude.ai, ChatGPT, any URL-based client)
+
+```
+https://mcp.arcusid.com/mcp
+```
+
+Streamable HTTP, stateless, no authentication.
+
+- **claude.ai / Claude Desktop:** Settings → Connectors → Add custom connector → paste the URL.
+- **ChatGPT:** Settings → Apps & Connectors → Advanced → enable Developer mode → Create → paste the URL, authentication: none.
+- **Claude Code:** `claude mcp add --transport http arcid https://mcp.arcusid.com/mcp`
+
+### Local (stdio via npx)
 
 No install step needed; clients run it with `npx`.
 
@@ -55,7 +69,13 @@ npm run dev            # run from source (tsx)
 npm test               # vitest
 npm run test:coverage  # 80% threshold enforced
 npm run inspect        # MCP Inspector against dist/
+npm run worker:dev     # remote endpoint locally (wrangler)
+npm run worker:deploy  # typecheck, test, deploy the Worker
 ```
+
+The remote endpoint is `worker/index.ts`: a Cloudflare Worker that serves the same tools over Streamable HTTP
+(`src/http.ts`). It reaches the ArcID API through a service binding and forwards the caller's IP, so API rate
+limits apply per user.
 
 ## License
 
