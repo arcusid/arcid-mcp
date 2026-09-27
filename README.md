@@ -19,28 +19,22 @@ Read-only. No wallet or API key needed.
 
 ## Install
 
-```bash
-git clone https://github.com/arcusid/arcid-mcp.git
-cd arcid-mcp
-npm install
-npm run build
-```
+No install step needed; clients run it with `npx`.
 
 ### Claude Code
 
 ```bash
-claude mcp add arcid -- node /absolute/path/to/arcid-mcp/dist/index.js
+claude mcp add arcid -- npx -y arcid-mcp
 ```
 
-### Claude Desktop / other clients
+### Claude Desktop / Cursor / other clients
 
 ```json
 {
   "mcpServers": {
     "arcid": {
-      "command": "node",
-      "args": ["/absolute/path/to/arcid-mcp/dist/index.js"],
-      "env": { "ARCID_API_URL": "https://api.arcusid.com" }
+      "command": "npx",
+      "args": ["-y", "arcid-mcp"]
     }
   }
 }
@@ -56,6 +50,7 @@ claude mcp add arcid -- node /absolute/path/to/arcid-mcp/dist/index.js
 ## Development
 
 ```bash
+git clone https://github.com/arcusid/arcid-mcp.git && cd arcid-mcp && npm install
 npm run dev            # run from source (tsx)
 npm test               # vitest
 npm run test:coverage  # 80% threshold enforced
