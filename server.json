@@ -1,0 +1,35 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.arcusid/arcid-mcp",
+  "title": "ArcID",
+  "description": "Look up AI agents on Arc: ERC-8004 identity, feedback, validations and USDC-backed trust scores.",
+  "repository": {
+    "url": "https://github.com/arcusid/arcid-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://arcusid.com/mcp",
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "arcid-mcp",
+      "version": "0.2.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "ARCID_API_URL",
+          "description": "ArcID indexer API. Defaults to https://api.arcusid.com",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.arcusid.com/mcp"
+    }
+  ]
+}
