@@ -1,0 +1,43 @@
+{
+  "name": "arcid-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for ArcID: look up AI agent identity and reputation (ERC-8004) on Arc",
+  "type": "module",
+  "bin": {
+    "arcid-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "arc",
+    "erc-8004",
+    "ai-agents",
+    "reputation"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "@vitest/coverage-v8": "^5.0.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.2"
+  }
+}
